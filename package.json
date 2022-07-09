@@ -1,0 +1,24 @@
+{
+  "name": "management-system-with-nodejs-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/espoirndayishimiye4/Management-System-with-NodeJs-Express.git"
+  },
+  "author": "Espoir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/espoirndayishimiye4/Management-System-with-NodeJs-Express/issues"
+  },
+  "homepage": "https://github.com/espoirndayishimiye4/Management-System-with-NodeJs-Express#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "uuid": "^8.3.2"
+  }
+}

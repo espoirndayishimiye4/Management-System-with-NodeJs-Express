@@ -3,6 +3,7 @@ const app = express()
 const routes = express.Router()
 
 const  staffs = require('../controllers/staffs')
+const time = require('../middleware/time')
 
  routes.route('/:id')
     .get(staffs.getOneStaff)
@@ -10,7 +11,7 @@ const  staffs = require('../controllers/staffs')
 routes.route('/')
     .get(staffs.getAllStaffs)
     .post(staffs.createStaff)
-    .patch(staffs.updateStaff)
+    .put(staffs.updateStaff)
     .delete(staffs.deleteStaff)
 
 module.exports = routes

@@ -7,6 +7,7 @@ app.use(express.json())
 
 const PORT = 3000
 
+app.use(time)
 app.use('/staffs', require('./routes/staffs'))
 app.use('/trainees',require('./routes/trainees'))
 app.use('/trainers',require('./routes/trainers'))

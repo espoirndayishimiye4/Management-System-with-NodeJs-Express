@@ -18,7 +18,8 @@ const createStaff = async (req, res)=>{
     const newStaff = {
         id:data.staffs[data.staffs.length - 1].id + 1 || 1,
         firstName: req.body.firstName,
-        lastName: req.body.lastName
+        lastName: req.body.lastName,
+        position: req.body.position
     };
      
     if(!newStaff.firstName || !newStaff.lastName){

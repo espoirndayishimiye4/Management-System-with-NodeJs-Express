@@ -1,10 +1,9 @@
-const fsPromises = require('fs').promises
-const path = require('path')
-
+const {writeJsonFile} = require('./functions')
 const data= {
     trainees: require('../models/trainees.json'),
     settrainees: function (data){this.trainees = data }
 }
+
 
 const getAlltrainees = (req,res)=>{
     try {
@@ -27,10 +26,8 @@ const createtrainee = async (req, res)=>{
     }
      
     data.settrainees([...data.trainees,newtrainee]);
-    await fsPromises.writeFile(
-        path.join(__dirname,'..','models','trainees.json'),
-        JSON.stringify(data.trainees)
-    );
+    const dataToWrite = data.trainees
+    writeJsonFile('trainees',dataToWrite)
         res.status(201).json({"message":"trainee Created Succesfully"});
 }
 const updatetrainee = async (req, res)=>{
@@ -45,10 +42,8 @@ const updatetrainee = async (req, res)=>{
     const filteredtrainee = data.trainees.filter(sta => sta.id !== parseInt(req.body.id))
     const updatedtrainee = [...filteredtrainee, trainee];
     data.settrainees(updatedtrainee);
-    await fsPromises.writeFile(
-        path.join(__dirname,'..','models','trainees.json'),
-        JSON.stringify(data.trainees)
-    );
+    const dataToWrite = data.trainees
+    writeJsonFile('trainees',dataToWrite)
     res.status(200).json({"message":`trainee with id ${req.body.id} Updated`})
 }
 const deletetrainee = async (req, res) =>{
@@ -56,10 +51,8 @@ const deletetrainee = async (req, res) =>{
     if(!trainee) return res.status(400).json({"message":`trainee with id ${req.body.id} not found`})
     const filteredtrainee = data.trainees.filter(stff => stff.id !== parseInt(req.body.id))
     data.settrainees([...filteredtrainee]);
-    await fsPromises.writeFile(
-        path.join(__dirname,'..','models','trainees.json'),
-        JSON.stringify(data.trainees)
-    );
+    const dataToWrite = data.trainees
+    writeJsonFile('trainees',dataToWrite)
     res.status(200).json({"message":`trainee with id ${req.body.id} deleted`}) 
 }
 

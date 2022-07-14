@@ -1,5 +1,4 @@
-const fsPromises = require('fs').promises
-const path = require('path')
+const {writeJsonFile} = require('./functions')
 
 const data= {
     trainers: require('../models/trainers.json'),
@@ -28,10 +27,8 @@ const createtrainer = async (req, res)=>{
     }
      
     data.settrainers([...data.trainers,newtrainer]);
-    await fsPromises.writeFile(
-        path.join(__dirname,'..','models','trainers.json'),
-        JSON.stringify(data.trainers)
-    );
+    const dataToWrite = data.trainers
+    writeJsonFile('trainees',dataToWrite)
         res.status(201).json({"message":"trainer Created Succesfully"});
 }
 const updatetrainer = async (req, res)=>{
@@ -47,10 +44,8 @@ const updatetrainer = async (req, res)=>{
     const filteredtrainer = data.trainers.filter(sta => sta.id !== parseInt(req.body.id))
     const updatedtrainer = [...filteredtrainer, trainer];
     data.settrainers(updatedtrainer);
-    await fsPromises.writeFile(
-        path.join(__dirname,'..','models','trainers.json'),
-        JSON.stringify(data.trainers)
-    );
+    const dataToWrite = data.trainers
+    writeJsonFile('trainees',dataToWrite)
     res.status(200).json({"message":`trainer with id ${req.body.id} Updated`})
 }
 const deletetrainer = async (req, res) =>{
@@ -58,10 +53,8 @@ const deletetrainer = async (req, res) =>{
     if(!trainer) return res.status(400).json({"message":`trainer with id ${req.body.id} not found`})
     const filteredtrainer = data.trainers.filter(stff => stff.id !== parseInt(req.body.id))
     data.settrainers([...filteredtrainer]);
-    await fsPromises.writeFile(
-        path.join(__dirname,'..','models','trainers.json'),
-        JSON.stringify(data.trainers)
-    );
+    const dataToWrite = data.trainers
+    writeJsonFile('trainees',dataToWrite)
     res.status(200).json({"message":`trainer with id ${req.body.id} deleted`}) 
 }
 
